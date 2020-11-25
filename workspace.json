@@ -15,7 +15,10 @@
             "main": "apps/g-ent/src/main.tsx",
             "polyfills": "apps/g-ent/src/polyfills.ts",
             "tsConfig": "apps/g-ent/tsconfig.app.json",
-            "assets": ["apps/g-ent/src/favicon.ico", "apps/g-ent/src/assets"],
+            "assets": [
+              "apps/g-ent/src/favicon.ico",
+              "apps/g-ent/src/assets"
+            ],
             "styles": [],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
@@ -59,7 +62,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/g-ent/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/g-ent/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
@@ -92,7 +97,84 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/g-ent-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/g-ent-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "g-ent-desktop": {
+      "root": "apps/g-ent-desktop",
+      "sourceRoot": "apps/g-ent-desktop/src",
+      "projectType": "application",
+      "prefix": "g-ent-desktop",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "nx-electron:build",
+          "options": {
+            "outputPath": "dist/apps/g-ent-desktop",
+            "main": "apps/g-ent-desktop/src/main.ts",
+            "tsConfig": "apps/g-ent-desktop/tsconfig.app.json",
+            "assets": [
+              "apps/g-ent-desktop/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/g-ent-desktop/src/environments/environment.ts",
+                  "with": "apps/g-ent-desktop/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "nx-electron:execute",
+          "options": {
+            "buildTarget": "g-ent-desktop:build"
+          }
+        },
+        "package": {
+          "builder": "nx-electron:package",
+          "options": {
+            "name": "g-ent-desktop",
+            "frontendProject": "g-ent",
+            "out": "dist/packages"
+          }
+        },
+        "make": {
+          "builder": "nx-electron:make",
+          "options": {
+            "name": "g-ent-desktop",
+            "frontendProject": "g-ent",
+            "out": "dist/executables"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/g-ent-desktop/tsconfig.app.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/g-ent-desktop/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/g-ent-desktop/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }
