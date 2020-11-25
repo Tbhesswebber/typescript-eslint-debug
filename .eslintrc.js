@@ -1,4 +1,4 @@
-{
+module.exports = {
   "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -12,6 +12,7 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    // "plugin:@typescript-eslint/recommended-requiring-type-checking", 
     "prettier",
     "prettier/@typescript-eslint"
   ],
@@ -53,7 +54,8 @@
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript"],
       "parserOptions": {
-        "project": "./**/tsconfig.?*.json"
+        "project": "./**/tsconfig.?*.json",
+        "tsconfigRootDir": __dirname
       },
       "rules": {}
     },
@@ -61,7 +63,8 @@
       "files": ["*.js", "*.jsx"],
       "extends": ["plugin:@nrwl/nx/javascript"],
       "parserOptions": {
-        "project": "./**/tsconfig.?*.json"
+        "project": "./**/tsconfig.?*.json",
+        "tsconfigRootDir": __dirname
       },
       "rules": {}
     }
