@@ -1,7 +1,4 @@
 {
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "cSpell.words": [
-        "exitzero",
-        "nrwl"
-    ]
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "cSpell.words": ["cssmodule", "exitzero", "nrwl"]
 }
