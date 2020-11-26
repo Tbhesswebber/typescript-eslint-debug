@@ -1,12 +1,14 @@
-console.log(__dirname);
-
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
-    project: './tsconfig.base.json',
+    project: [
+      './tsconfig.base.json',
+      './**/tsconfig.?*.json',
+    ],
+    projectFolderIgnoreList: ['**/node_modules/**'],
     tsconfigRootDir: __dirname,
   },
   ignorePatterns: ['**/*'],
@@ -54,19 +56,11 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       extends: ['plugin:@nrwl/nx/typescript'],
-      parserOptions: {
-        project: './**/tsconfig.?*.json',
-        tsconfigRootDir: __dirname,
-      },
       rules: {},
     },
     {
       files: ['*.js', '*.jsx'],
       extends: ['plugin:@nrwl/nx/javascript'],
-      parserOptions: {
-        project: './**/tsconfig.?*.json',
-        tsconfigRootDir: __dirname,
-      },
       rules: {},
     },
   ],
